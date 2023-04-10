@@ -1,0 +1,8 @@
+[package]
+name = "xgamerman626/ecsgame"
+version = "0.0.1"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+[dependencies]
+matter = "evaera/matter@0.6.2"

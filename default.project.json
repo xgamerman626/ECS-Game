@@ -1,0 +1,38 @@
+{
+  "name": "ECS-Game",
+  "tree": {
+    "$className": "DataModel",
+
+    "ReplicatedStorage": {
+      "Source": {
+        "$path": "src/ReplicatedStorage",
+        "$ignoreUnknownInstances": true
+      },
+      "Packages": {
+        "$path": "src/Packages"
+      }
+    },
+
+    "ServerScriptService": {
+      "Source": {
+        "$path": "src/ServerScriptService"
+      }
+    },
+
+    "ServerStorage": {
+      "Source": {
+        "$path": "src/ServerStorage",
+        "$ignoreUnknownInstances": true
+      }
+    },
+
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "Source": {
+          "$path": "src/StarterPlayerScripts"
+        }
+      }
+    }
+
+  }
+}
