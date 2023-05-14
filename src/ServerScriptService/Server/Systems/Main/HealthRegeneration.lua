@@ -15,6 +15,10 @@ local Poisoned = Components.Poisoned
 local function HealthRegenration(World)
 
     for id, health, player in World:query(Health, Player):without(Poisoned) do
+        if player.States.InCombat == true then
+            return
+        end
+
         if health.Current < health.Max and player.States.SittingAtCampfire == false then
             
             World:insert(id, health:patch({

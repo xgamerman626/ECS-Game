@@ -4,19 +4,22 @@
 local ServerStorage = game:GetService("ServerStorage")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
-local Run = game:GetService("RunService")
 
 -- Requires
+local Start = require(ReplicatedStorage.Source.Shared.Start)
+
 local Matter = require(ReplicatedStorage.Packages.matter)
-local Components = require(ReplicatedStorage.Source.Config.Components)
+local Components = require(ReplicatedStorage.Source.Shared.Components)
 local ProfileService = require(ServerStorage.Source.Util.Data)
 
 local Stored_Data = require(ServerStorage.Source.Config.Stored_Data)
 local Data_Structure = require(ServerStorage.Source.Config.Data_Structure)
 
 -- Locals
-local World = Matter.World.new()
-local Loop = Matter.Loop.new(World)
+local World = Start({
+	script.Systems,
+	ReplicatedStorage.Source.Shared.Systems,
+})
 
 local Player_Profile_Store = ProfileService.GetProfileStore(Data_Structure.ProfileStoreName, Data_Structure.Main)
 
@@ -68,7 +71,7 @@ local function Load_Player_Data(Player: Player, Slot)
 
 			MergeDataWithTemplate(Profile.Data, Data_Structure)
 
-			print(script.Name, "PlayerDataLoaded", Player.Name)
+			print("[Server]", "PlayerDataLoaded", Player.Name)
 			Player:LoadCharacter()
 		else
 			Profile:Release()
@@ -81,34 +84,20 @@ end
 local function Unload_Player_Data(Player: Player)
 	local Profile = Stored_Data.Players[Player]
 	if Profile ~= nil then
-		print(script.Name, "PlayerDataSaved", Player.Name)
+		print("[Server]", "PlayerDataSaved", Player.Name)
 		Profile:Release()
 	end
 end
 
--- Schedule Systems
-local Systems = {}
-
-for _, v in pairs(ServerStorage.Source.Systems:GetChildren()) do
-    for _, Child in pairs(v:GetChildren()) do
-
-        if Child:IsA("ModuleScript") then
-            table.insert(Systems, require(Child))
-        end
-
-    end
-end
-
-Loop:scheduleSystems(Systems)
-
-Loop:begin({
-    default = Run.Heartbeat,
-})
-
+-- Connections
 Players.PlayerAdded:Connect(function(Player)
+	print("[Server]", "PlayerAdded", Player.Name)
     Load_Player_Data(Player, "Slot1")
 end)
 
 Players.PlayerRemoving:Connect(function(Player)
+	print("[Server]", "PlayerRemoving", Player.Name)
     Unload_Player_Data(Player)
 end)
+
+-- SetupTags(World)
