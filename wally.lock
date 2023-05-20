@@ -18,6 +18,11 @@ version = "0.4.1"
 dependencies = []
 
 [[package]]
+name = "sayhisam1/rewire"
+version = "0.3.0"
+dependencies = []
+
+[[package]]
 name = "xgamerman626/ecsgame"
 version = "0.0.1"
-dependencies = [["matter", "evaera/matter@0.6.2"], ["plasma", "evaera/plasma@0.4.2"]]
+dependencies = [["matter", "evaera/matter@0.6.2"], ["plasma", "evaera/plasma@0.4.2"], ["rewire", "sayhisam1/rewire@0.3.0"]]

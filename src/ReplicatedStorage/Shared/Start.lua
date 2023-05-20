@@ -8,7 +8,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 -- Requires
 local Matter = require(ReplicatedStorage.Packages.matter)
 local Plasma = require(ReplicatedStorage.Packages.plasma)
--- local HotReloader = require(ReplicatedStorage.Packages.rewire).HotReloader
+local HotReloader = require(ReplicatedStorage.Packages.rewire).HotReloader
 local Components = require(script.Parent.Components)
 
 local function Start(Containers)
@@ -31,7 +31,7 @@ local function Start(Containers)
 
 	-- Set up hot reloading
 
-	-- local hotReloader = HotReloader.new()
+	local hotReloader = HotReloader.new()
 
 	local firstRunSystems = {}
 	local systemsByModule = {}
@@ -70,9 +70,9 @@ local function Start(Containers)
 		end
 	end
 
-	--for _, Container in Containers do
-	--	hotReloader:scan(Container, loadModule, unloadModule)
-	--end
+	for _, Container in Containers do
+		hotReloader:scan(Container, loadModule, unloadModule)
+	end
 
 	Loop:scheduleSystems(firstRunSystems)
 	firstRunSystems = nil

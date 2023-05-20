@@ -3,10 +3,21 @@
 -- Return
 return {
 
-    ProfileStoreName = "TestingData1", -- MainData#/TestingData#
+    ProfileStoreName = "TestingData10", -- MainData#/TestingData#
 
     ["Main"] = {
-        Test = 123,
+
+        Inventory = {
+            Equipped = {
+                Helmet = "",
+                Chestplate = "",
+                Boots = "",
+                Weapon = "Training Daggers",
+                Potion = "",
+            },
+            Backpack = {},
+        },
+
     },
 
 }

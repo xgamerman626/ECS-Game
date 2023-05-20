@@ -2,9 +2,6 @@
 
 -- Return
 return {
-
-    Players = {
-        
-    },
-
+    Players = {},
+    Player_Combos = {}
 }

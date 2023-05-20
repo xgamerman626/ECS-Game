@@ -4,18 +4,23 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 -- Requires
-local Components = require(ReplicatedStorage.Source.Config.Components)
+local Components = require(ReplicatedStorage.Source.Shared.Components)
 
 -- Locals
 local Player = Components.Player
 local Health = Components.Health
-local Poisoned = Components.Poisoned
+local Debuffs = Components.Debuffs
 
 -- Main
 local function HealthRegenration(World)
 
-    for id, health, player in World:query(Health, Player):without(Poisoned) do
+    for id, health, player, debuffs in World:query(Health, Player, Debuffs) do
         if player.States.InCombat == true then
+            return
+        end
+
+        local Bleeding = debuffs["Bleeding"]
+        if Bleeding then
             return
         end
 

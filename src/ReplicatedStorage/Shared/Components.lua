@@ -20,4 +20,7 @@ return {
 
     Weapon = Matter.component(),
     Hitbox = Matter.component(),
+
+    Buffs = Matter.component(),
+    Debuffs = Matter.component(),
 }

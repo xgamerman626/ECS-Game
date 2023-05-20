@@ -20,12 +20,21 @@ local LeftHipJointC0 = nil
 local RightHipJointC0 = nil
 
 -- Main
+local function IsCharacterAlive(Player)
+    local Character = Player.Character
+    if Character then
+        local Humanoid = Character:FindFirstChild("Humanoid")
+        return Humanoid and Humanoid.Health > 0 and Character.HumanoidRootPart:FindFirstChild("Root Hip")
+    end
+end
+
 local function CharacterLean(World)
 
-    if Player.Character then
+    if IsCharacterAlive(Player) then
 
         -- Locals
         local Character = Player.Character
+        local Humanoid = Player.Character.Humanoid
         local HumanoidRootPart = Character.HumanoidRootPart
         local Torso	= Character.Torso
 
@@ -40,10 +49,6 @@ local function CharacterLean(World)
         end
 
         -- Main
-        if Character.Humanoid.Health <= 0 then
-            return
-        end
-
         Force = HumanoidRootPart.Velocity * Vector3.new(1,0,1)
         if Force.Magnitude > 2 then
             Direction = Force.Unit	

@@ -4,7 +4,7 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 -- Requires
-local Components = require(ReplicatedStorage.Source.Config.Components)
+local Components = require(ReplicatedStorage.Source.Shared.Components)
 
 -- Locals
 local Player = Components.Player
